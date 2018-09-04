@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+	<!--实体映射-->
+	<resultMap id="userResultMap" type="com.entity.User">
+		<!--主键-->
+		<id column="id" jdbcType="BIGINT" property="id"/>
+		<!--用户名-->
+		<result column="account" jdbcType="VARCHAR" property="account" />
+		<!--密码-->
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<!--电话号码-->
+		<result column="mobile_number" jdbcType="VARCHAR" property="mobileNumber" />
+		<!--邮箱-->
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<!--身份证号码-->
+		<result column="id_card" jdbcType="VARCHAR" property="idCard" />
+		<!--头像-->
+		<result column="head_image" jdbcType="VARCHAR" property="headImage" />
+		<!--性别-->
+		<result column="gender" jdbcType="INTEGER" property="gender" />
+		<!--姓名-->
+		<result column="full_name" jdbcType="VARCHAR" property="fullName" />
+		<!--生日-->
+		<result column="birthday" jdbcType="BIGINT" property="birthday" />
+		<!--删除标记-->
+		<result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+		<!--创建人-->
+		<result column="create_id" jdbcType="BIGINT" property="createId" />
+		<!--创建人姓名-->
+		<result column="create_name" jdbcType="VARCHAR" property="createName" />
+		<!--创建时间-->
+		<result column="create_time" jdbcType="BIGINT" property="createTime" />
+		<!--修改人-->
+		<result column="modify_id" jdbcType="BIGINT" property="modifyId" />
+		<!--修改人姓名-->
+		<result column="modify_name" jdbcType="VARCHAR" property="modifyName" />
+		<!--修改时间-->
+		<result column="modify_time" jdbcType="BIGINT" property="modifyTime" />
+		<!--住址-->
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<!--昵称-->
+		<result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+		<!--个性签名-->
+		<result column="signature" jdbcType="VARCHAR" property="signature" />
+		<!--备注-->
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+	</resultMap>
+
+
+	<!-- 通用查询结果列-->
+	<sql id="columns">
+		id,
+		account,
+		password,
+		mobile_number,
+		email,
+		id_card,
+		head_image,
+		gender,
+		full_name,
+		birthday,
+		delete_flag,
+		create_id,
+		create_name,
+		create_time,
+		modify_id,
+		modify_name,
+		modify_time,
+		address,
+		nick_name,
+		signature,
+		remark
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="get" resultType="com.entity.User" parameterType="java.lang.Long">
+		SELECT
+		<include refid="columns" />
+		FROM user
+		WHERE id = #{id ,jdbcType = BIGINT}
+	</select>
+
+	<select id="login" resultType="com.entity.User" parameterType="map">
+		SELECT
+		<include refid="columns" />
+		FROM user
+		<where>
+			delete_flag = 0
+			AND
+			account = #{account,jdbcType=VARCHAR} AND password = #{password,jdbcType=VARCHAR}
+		</where>
+		limit 0,1
+	</select>
+
+	<!-- 查询（根据条件查询） -->
+	<select id="getList" resultMap="userResultMap" parameterType="map">
+		SELECT
+		<include refid="columns" />
+		FROM user
+		<include refid="selectSql" />
+	</select>
+
+	<!-- 查询（根据条件查询） -->
+	<select id="getPageList" resultMap="userResultMap" parameterType="com.entity.User">
+		SELECT
+		<include refid="columns" />
+		FROM user
+		<include refid="selectSql" />
+		ORDER BY id DESC limit #{pageIndex,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="delete" parameterType="java.lang.Long">
+		DELETE FROM user
+		WHERE id = #{id ,jdbcType = BIGINT}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="addAndId" parameterType="com.entity.User">
+		INSERT INTO user
+		(id,
+		account,
+		password,
+		mobile_number,
+		email,
+		id_card,
+		head_image,
+		gender,
+		full_name,
+		birthday,
+		delete_flag,
+		create_id,
+		create_name,
+		create_time,
+		modify_id,
+		modify_name,
+		modify_time,
+		address,
+		nick_name,
+		signature,
+		remark)
+		VALUES
+		(#{id ,jdbcType = BIGINT},
+		#{account ,jdbcType = VARCHAR},
+		#{password ,jdbcType = VARCHAR},
+		#{mobileNumber ,jdbcType = VARCHAR},
+		#{email ,jdbcType = VARCHAR},
+		#{idCard ,jdbcType = VARCHAR},
+		#{headImage ,jdbcType = VARCHAR},
+		#{gender ,jdbcType = INTEGER},
+		#{fullName ,jdbcType = VARCHAR},
+		#{birthday ,jdbcType = BIGINT},
+		#{deleteFlag ,jdbcType = TINYINT},
+		#{createId ,jdbcType = BIGINT},
+		#{createName ,jdbcType = VARCHAR},
+		#{createTime ,jdbcType = BIGINT},
+		#{modifyId ,jdbcType = BIGINT},
+		#{modifyName ,jdbcType = VARCHAR},
+		#{modifyTime ,jdbcType = BIGINT},
+		#{address ,jdbcType = VARCHAR},
+		#{nickName ,jdbcType = VARCHAR},
+		#{signature ,jdbcType = VARCHAR},
+		#{remark ,jdbcType = VARCHAR})
+		<selectKey order="AFTER" keyProperty="id" resultType="java.lang.Long">SELECT @@IDENTITY as id
+		</selectKey>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="update" parameterType="map">
+		UPDATE user
+		<set>
+			<if test="account != null">
+				account = #{account ,jdbcType = BIGINT},
+			</if>
+			<if test="password != null">
+				password = #{password ,jdbcType = BIGINT},
+			</if>
+			<if test="mobileNumber != null">
+				mobile_number = #{mobileNumber ,jdbcType = BIGINT},
+			</if>
+			<if test="email != null">
+				email = #{email ,jdbcType = BIGINT},
+			</if>
+			<if test="idCard != null">
+				id_card = #{idCard ,jdbcType = BIGINT},
+			</if>
+			<if test="email != null">
+				head_image = #{email ,jdbcType = BIGINT},
+			</if>
+			<if test="gender != null">
+				gender = #{gender ,jdbcType = BIGINT},
+			</if>
+			<if test="fullName != null">
+				full_name = #{fullName ,jdbcType = BIGINT},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday ,jdbcType = BIGINT},
+			</if>
+			<if test="modifyId != null">
+				modify_id = #{modifyId ,jdbcType = BIGINT},
+			</if>
+			<if test="modifyName != null">
+				modify_name = #{modifyName ,jdbcType = BIGINT},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime ,jdbcType = BIGINT},
+			</if>
+			<if test="address != null">
+				address = #{address ,jdbcType = BIGINT},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName ,jdbcType = BIGINT},
+			</if>
+			<if test="signature != null">
+				signature = #{signature ,jdbcType = BIGINT},
+			</if>
+			<if test="remark != null">
+				remark = #{remark ,jdbcType = BIGINT}
+			</if>
+		</set>
+		<include refid="selectSql"/>
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateById" parameterType="com.entity.User">
+		UPDATE user
+		<set>
+			<if test="account != null">
+				account = #{account ,jdbcType = VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password ,jdbcType = VARCHAR},
+			</if>
+			<if test="mobileNumber != null">
+				mobile_number = #{mobileNumber ,jdbcType = VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email ,jdbcType = VARCHAR},
+			</if>
+			<if test="idCard != null">
+				id_card = #{idCard ,jdbcType = VARCHAR},
+			</if>
+			<if test="headImage != null">
+				head_image = #{headImage ,jdbcType = VARCHAR},
+			</if>
+			<if test="gender != null">
+				gender = #{gender ,jdbcType = INTEGER},
+			</if>
+			<if test="fullName != null">
+				full_name = #{fullName ,jdbcType = VARCHAR},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday ,jdbcType = BIGINT},
+			</if>
+			<if test="deleteFlag != null">
+				delete_flag = #{deleteFlag ,jdbcType = TINYINT},
+			</if>
+			<if test="createId != null">
+				create_id = #{createId ,jdbcType = BIGINT},
+			</if>
+			<if test="createName != null">
+				create_name = #{createName ,jdbcType = VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime ,jdbcType = BIGINT},
+			</if>
+			<if test="modifyId != null">
+				modify_id = #{modifyId ,jdbcType = BIGINT},
+			</if>
+			<if test="modifyName != null">
+				modify_name = #{modifyName ,jdbcType = VARCHAR},
+			</if>
+			<if test="modifyTime != null">
+				modify_time = #{modifyTime ,jdbcType = BIGINT},
+			</if>
+			<if test="address != null">
+				address = #{address ,jdbcType = VARCHAR},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName ,jdbcType = VARCHAR},
+			</if>
+			<if test="signature != null">
+				signature = #{signature ,jdbcType = VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark ,jdbcType = VARCHAR}
+			</if>
+
+		</set>
+		WHERE id = #{id ,jdbcType = BIGINT}
+	</update>
+
+	<!--查询条件-->
+	<sql id="selectSql">
+		<where>
+			delete_flag = 0
+			<if test="mobileNumber != null">
+				mobile_number LIKE '%${mobileNumber}%'
+			</if>
+		</where>
+	</sql>
+
+</mapper>

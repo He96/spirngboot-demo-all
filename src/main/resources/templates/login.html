@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit"/>
+    <title>登录</title>
+    <link rel="stylesheet" th:href="@{css/base.css}"/>
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+</head>
+<body>
+<!-- 模态框（Modal） -->
+<!--<div class="modal-dialog">
+    <div class="modal-content">
+        &lt;!&ndash; 模态框头部 &ndash;&gt;
+        <div class="modal-header">
+            <h5 class="modal-title" id="modal_title"></h5>
+            <button type="button" class="close" data-dismiss="modal"></button>
+        </div>
+        &lt;!&ndash; 模态框主体 &ndash;&gt;
+        <div class="modal-body" id="modal_body">
+        </div>
+        &lt;!&ndash; 模态框底部 &ndash;&gt;
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">关闭</button>
+        </div>
+    </div>
+</div>-->
+<div class="bg"></div>
+<div class="container">
+    <div class="line bouncein">
+        <div class="xs6 xm4 xs3-move xm4-move">
+            <div style="height:150px;"></div>
+            <div class="media media-y margin-big-bottom">
+            </div>
+            <form id="loginForm">
+                <div class="panel loginbox">
+                    <div class="text-center margin-big padding-big-top">
+                        <h2>后台管理中心</h2>
+                    </div>
+                    <div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
+                        <div class="form-group">
+                            <div class="field field-icon-right">
+                                <input type="text" class="input input-big" name="account" id="account"
+                                       placeholder="用户名"/>
+                                <span class="icon icon-user margin-small"></span>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="field field-icon-right">
+                                <input type="password" class="input input-big" name="password" id="password"
+                                       placeholder="密码"/>
+                                <span class="icon icon-key margin-small"></span>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">
+                            <div class="field">
+                                <input type="text" class="input input-big" name="code" id="code" placeholder="验证码" />
+                                <img src="images/passcode.jpg" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" onClick="this.src=this.src+'?'">
+                            </div>
+                        </div>-->
+                    </div>
+                    <div style="padding:30px;">
+                        <input type="button" id="button" class="button button-block bg-main text-big input-big"
+                               value="登录">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{js/jquery3.3.1.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{js/jquery.form.js}"></script>
+<script th:src="@{js/jquery.validate.min.js}"></script>
+<script th:src="@{js/messages_zh.js}"></script>
+<script th:src="@{js/config.js}"></script>
+<script th:src="@{js/login.js}" type="text/javascript"></script>
+</body>
+
+</html>

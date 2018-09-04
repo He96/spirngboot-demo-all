@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit"/>
+    <title>首页</title>
+    <link rel="stylesheet" th:href="@{css/base.css}"/>
+    <link rel="stylesheet" th:href="@{css/style.css}"/>
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
+</head>
+<body>
+<h1>Hello index</h1>
+<span th:if="${userInfo.account != null}">
+        <h3 th:text="${userInfo.fullName}"></h3>
+    </span>
+<button type="button" class="btn btn-sm btn-primary" id="exitSys">退出系统</button>
+</body>
+<script th:src="@{js/jquery3.3.1.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{js/jquery.form.js}"></script>
+<script th:src="@{js/jquery.validate.min.js}"></script>
+<script th:src="@{js/messages_zh.js}"></script>
+<script th:src="@{js/config.js}"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#exitSys').click(function () {
+            $.get("sign/out", function (data) {
+                if (data.code === 1) {
+                    window.location.href = 'login';
+                }
+            })
+        });
+    });
+</script>
+</html>
