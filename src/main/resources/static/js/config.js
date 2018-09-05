@@ -24,6 +24,8 @@ function showModel(title,content) {
     $('#myModal').modal('show');
 }
 
+
+
 $(function () {
     $('body').append(tipModal);
     $.ajaxSetup({

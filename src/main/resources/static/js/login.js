@@ -1,6 +1,20 @@
 $(function () {
+    //回车事件
+    $('body').keyup(function (e) {
+        var event = e || window.event;
+        var code = event.keyCode || event.which || event.charCode;
+        if (code == 13) {
+            login();
+        }
+    });
+
     //登录
     $('#button').click(function () {
+        login();
+    });
+
+    //提交登录信息
+    function login() {
         checkForm();
         if ($('#loginForm').valid()) {
             console.log("验证通过");
@@ -12,15 +26,15 @@ $(function () {
                 data: JSON.stringify(data),
                 success: function (result) {
                     if (result.code == 1) {
-                        window.location.href='index';
+                        window.location.href = 'index';
                     }
                     if (result.code == -1) {
-                        showModel("提示",result.msg);
+                        showModel("提示", result.msg);
                     }
                 }
             });
         }
-    });
+    }
 
     //表单验证
     function checkForm() {
