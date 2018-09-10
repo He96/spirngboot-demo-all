@@ -13,7 +13,7 @@ import java.io.IOException;
 @SpringBootApplication()
 @MapperScan(basePackages = {"com.mapper"})
 @EnableConfigurationProperties()
-@ImportResource(locations = {"classpath:mybatis.xml"})
+@ImportResource({"classpath:mybatis.xml"})
 public class Main {
     public static void main(String[] args){
         SpringApplication.run(Main.class,args);
