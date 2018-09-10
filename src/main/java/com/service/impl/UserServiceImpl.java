@@ -8,6 +8,7 @@ import com.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -32,5 +33,12 @@ public class UserServiceImpl implements UserService {
         map.put("password", MD5Util.MD5(user.getPassword()));
         User entity = userMapper.login(map);
         return entity;
+    }
+
+    @Override
+    public List<User> getList(User user) {
+        Map<String, Object> map = JSON.parseObject(JSON.toJSONString(user));
+        List<User> list = userMapper.getList(map);
+        return list;
     }
 }

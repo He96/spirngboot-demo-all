@@ -12,6 +12,11 @@ public class ListResult<T> extends Result implements Serializable {
         this.rows = rows;
     }
 
+    public ListResult(int code,String msg, T rows) {
+        super(code,msg);
+        this.rows = rows;
+    }
+
     public ListResult(int code, String msg, int total, T rows) {
         super(code, msg);
         this.total = total;

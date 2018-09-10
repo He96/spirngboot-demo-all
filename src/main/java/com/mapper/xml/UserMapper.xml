@@ -299,6 +299,9 @@
 			<if test="mobileNumber != null">
 				mobile_number LIKE '%${mobileNumber}%'
 			</if>
+			<if test="fullName != null">
+				full_name LIKE '%${fullName}%'
+			</if>
 		</where>
 	</sql>
 

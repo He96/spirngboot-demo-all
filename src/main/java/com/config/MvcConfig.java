@@ -32,7 +32,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("order").setViewName("order");
         registry.addViewController("push").setViewName("news");
         registry.addViewController("login").setViewName("login");
-        registry.addViewController("user").setViewName("user");
+        //registry.addViewController("user").setViewName("user");
     }
 
     @Bean

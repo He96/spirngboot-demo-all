@@ -27,263 +27,10 @@
 <body>
 <div id="wrapper">
     <!--菜单栏-->
-    <nav class="navbar-default navbar-static-side" role="navigation">
-        <div class="sidebar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="nav-header">
-
-                    <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="/images/p3.jpg" style="width: 64px;height: 64px" />
-                             </span>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index">
-                            <span class="clear">
-                                <span class="block m-t-xs">
-                                    <strong class="font-bold">何爽</strong>
-                                </span>
-                                <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="form_avatar.html">修改头像</a>
-                            </li>
-                            <li><a href="profile.html">个人资料</a>
-                            </li>
-                            <li><a href="contacts.html">联系我们</a>
-                            </li>
-                            <li><a href="mailbox.html">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">安全退出</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </li>
-                <li class="active">
-                    <a href="index"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span></a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span class="nav-label">系统管理 </span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="index.html#">菜单管理</a>
-                        <li><a href="index.html#">角色管理</a>
-                        </li>
-                        <li>
-                            <a href="index.html#">用户管理</a>
-                        </li>
-                        <li>
-                            <a href="index.html#">行政区域管理</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-wrench"></i>
-                        <span class="nav-label">配置管理</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="#">配置信息</a></li>
-                        <li><a href="#">版本管理</a></li>
-                        <li><a href="#">关于我们</a></li>
-                        <li><a href="#">分享信息</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-user"></i>
-                        <span class="nav-label">会员管理</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="#">会员列表</a></li>
-                        <li><a href="#">第三方登录</a></li>
-                        <li><a href="#">用户反馈</a></li>
-                        <li><a href="#">单位管理</a></li>
-                        <li><a href="#">银行信息</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-list-alt"></i>
-                        <span class="nav-label">订单管理</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="#">未支付</a></li>
-                        <li><a href="#">预约中</a></li>
-                        <li><a href="#">预约失败</a></li>
-                        <li><a href="#">已出场</a></li>
-                        <li><a href="#">取消出场结算</a></li>
-                        <li><a href="#">已取消</a></li>
-                        <li><a href="#">已完成</a></li>
-                        <li><a href="#">全部订单</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-rub"></i>
-                        <span class="nav-label">停车管理</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="#">车场管理</a></li>
-                        <li><a href="#">区域管理</a></li>
-                        <li><a href="#">路径管理</a></li>
-                        <li><a href="#">进出口管理</a></li>
-                        <li><a href="#">停车位管理</a></li>
-                        <li><a href="#">停车位提示</a></li>
-                        <li><a href="#">共享信息管理</a></li>
-                        <li><a href="#">车位导入</a></li>
-                        <li><a href="#">楼层管理</a></li>
-                        <li><a href="#">设备绑定</a></li>
-                        <li><a href="#">车位地磁管理</a></li>
-                        <li><a href="#">车场运营情况</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-building"></i>
-                        <span class="nav-label">物业管理</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-car"></i>
-                        <span class="nav-label">临时停车</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-bullhorn"></i>
-                        <span class="nav-label">消息管理</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-cog"></i>
-                        <span class="nav-label">设备管理</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                </li>
-            </ul>
-
-            </ul>
-
-        </div>
-    </nav>
-
+    <nav th:replace="index :: navModal"></nav>
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <!--顶部栏-->
-        <div class="row border-bottom">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <!--搜索栏-->
-                    <form role="search" class="navbar-form-custom" method="post" action="search_results">
-                        <div class="form-group">
-                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
-                </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li>
-                        <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎使用后台管理系统</span>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index">
-                            <i class="fa fa-envelope"></i>  <span class="label label-error">99+</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="/images/a8.jpg">
-                                    </a>
-                                    <div class="media-body">
-                                        <small class="pull-right">46小时前</small>
-                                        <strong>小四</strong> 项目已处理完结
-                                        <br>
-                                        <small class="text-muted">3天前 2014.11.8</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="/images/p3.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right text-navy">25小时前</small>
-                                        <strong>国民岳父</strong> 这是一条测试信息
-                                        <br>
-                                        <small class="text-muted">昨天</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="mailbox.html">
-                                        <i class="fa fa-envelope"></i>  <strong> 查看所有消息</strong>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index">
-                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="mailbox">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
-                                        <span class="pull-right text-muted small">4分钟前</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="profile">
-                                    <div>
-                                        <i class="fa fa-qq fa-fw"></i> 3条新回复
-                                        <span class="pull-right text-muted small">12分钟钱</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="notifications">
-                                        <strong>查看所有 </strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li>
-                        <a href="login">
-                            <i class="fa fa-sign-out"></i> 退出
-                        </a>
-                    </li>
-                </ul>
-
-            </nav>
-        </div>
+        <div th:replace="index :: navBorderTop"></div>
         <!--内容栏-->
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
@@ -309,47 +56,29 @@
                                     <th>电子邮箱</th>
                                     <th>身份证号码</th>
                                     <th>管理员</th>
-                                    <th>启用</th>
+                                    <th>生日</th>
                                     <th>备注</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1778712263</td>
-                                    <td>何爽</td>
-                                    <td>1778712263</td>
-                                    <td>hs16345@163.com</td>
-                                    <td>510293199602290986</td>
+                                <tbody th:if="!${not #lists.isEmpty(userList)}">
+                                    <td colspan="4" style="color: #999999">暂无记录!</td>
+                                </tbody>
+                                <tbody th:if="${not #lists.isEmpty(userList)}">
+                                <tr th:each="user:${userList}">
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.account}"></td>
+                                    <td th:text="${user.fullName}"></td>
+                                    <td th:text="${user.mobileNumber}"></td>
+                                    <td th:text="${user.email}"></td>
+                                    <td th:text="${user.idCard}"></td>
                                     <td>是</td>
-                                    <td>是</td>
-                                    <td>暂无</td>
-                                    <td><a href="#">重置密码</a> <a href="#">修改</a> <a href="#">删除</a></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>1778712266</td>
-                                    <td>mathew</td>
-                                    <td>1778712266</td>
-                                    <td>hs163164@163.com</td>
-                                    <td>510293199602290986</td>
-                                    <td>否</td>
-                                    <td>是</td>
-                                    <td>暂无</td>
-                                    <td><a href="#">重置密码</a> <a href="#">修改</a> <a href="#">删除</a></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>18387390546</td>
-                                    <td>He</td>
-                                    <td>18387390546</td>
-                                    <td>184239588@qq.com</td>
-                                    <td>510293199602290986</td>
-                                    <td>否</td>
-                                    <td>否</td>
-                                    <td>暂无</td>
-                                    <td><a href="#">重置密码</a> <a href="#">修改</a> <a href="#">删除</a></td>
+                                    <td th:text="${#dates.format(user.birthday, 'yyyy年MM月dd日')}"></td>
+                                    <td th:with="isRemark = ${user.remark}==null">
+                                        <span th:if="${isRemark}">暂无</span>
+                                        <span th:if="!${isRemark}" th:text="${user.remark}"></span>
+                                    </td>
+                                    <td><a href="#"  th:onclick="'resetPwd(\''+${user.id}+'\');'">重置密码</a> <a href="#">修改</a> <a href="#">删除</a></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -359,14 +88,7 @@
             </div>
         </div>
         <!--尾部栏-->
-        <div class="footer">
-            <div class="pull-right">
-                By：<a href="https://blog.csdn.net/qq_15708851/article/details/80858682" target="_blank">Mathew's blog</a>
-            </div>
-            <div>
-                <strong>Copyright</strong> He &copy; 2018
-            </div>
-        </div>
+        <div th:replace="index :: footer"></div>
     </div>
 </div>
 

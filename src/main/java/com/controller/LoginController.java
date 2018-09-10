@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.entity.User;
 import com.service.UserService;
 import com.util.AllowPass;
+import com.util.ListResult;
 import com.util.Result;
 import com.config.LoginContext;
 import com.config.LoginInfo;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.UUID;
 
 //用户登陆
@@ -80,5 +82,16 @@ public class LoginController {
             model.addAttribute("info", "登录信息已过期，请重新登录");
             return "redirect:login";
         }
+    }
+
+    //获取用户信息
+    @RequestMapping(value = "user",method = RequestMethod.GET)
+    public String userList(User user,Model model) {
+        if(user==null){
+            user = new User();
+        }
+        List<User> list = userService.getList(user);
+        model.addAttribute("userList",list);
+        return "user";
     }
 }
