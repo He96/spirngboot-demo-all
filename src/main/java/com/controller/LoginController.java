@@ -73,8 +73,7 @@ public class LoginController {
         LoginInfo info = loginContext.getInfo();
         if (info != null && !"".equals(info.getAccount())) {
             User user = new User();
-            user.setAccount("admin");
-            user.setFullName("何爽");
+            BeanUtils.copyProperties(info,user);
             model.addAttribute("userInfo", user);
             return "index";
         } else {
