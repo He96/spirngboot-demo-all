@@ -59,23 +59,21 @@ public class LoginController {
      * @return 1：成功 0：失败
      */
     @RequestMapping(value = "sign/out", method = RequestMethod.GET)
-    @ResponseBody
-    public Result signOut() {
+    public String signOut() {
         try {
             loginContext.signOut();
-            return new Result(1, "退出成功！");
         } catch (Exception ex) {
-            return new Result(0, "退出失败！");
+            ex.printStackTrace();
         }
+        return "redirect:login";
     }
 
-    @AllowPass
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public String indexPage(Model model) {
         LoginInfo info = loginContext.getInfo();
         if (info != null && !"".equals(info.getAccount())) {
             User user = new User();
-            BeanUtils.copyProperties(info,user);
+            BeanUtils.copyProperties(info, user);
             model.addAttribute("userInfo", user);
             return "index";
         } else {
@@ -85,13 +83,13 @@ public class LoginController {
     }
 
     //获取用户信息
-    @RequestMapping(value = "user",method = RequestMethod.GET)
-    public String userList(User user,Model model) {
-        if(user==null){
+    @RequestMapping(value = "user", method = RequestMethod.GET)
+    public String userList(User user, Model model) {
+        if (user == null) {
             user = new User();
         }
         List<User> list = userService.getList(user);
-        model.addAttribute("userList",list);
+        model.addAttribute("userList", list);
         return "user";
     }
 }

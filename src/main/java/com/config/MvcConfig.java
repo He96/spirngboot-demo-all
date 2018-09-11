@@ -14,6 +14,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import java.util.List;
 
@@ -32,17 +33,18 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("order").setViewName("order");
         registry.addViewController("push").setViewName("news");
         registry.addViewController("login").setViewName("login");
-        //registry.addViewController("user").setViewName("user");
+        registry.addViewController("ws").setViewName("ws");
     }
 
-    @Bean
+    //MVC模式
+    /*@Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setPrefix("templates/");
         resolver.setSuffix(".html");
         resolver.setViewClass(JstlView.class);
         return resolver;
-    }
+    }*/
 
    /* //上传文件大小设置
     @Bean
@@ -62,8 +64,10 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截规则排除
-        registry.addInterceptor(mvcInterceptor).addPathPatterns("/**").
-                excludePathPatterns("/api/no");
+        registry.addInterceptor(mvcInterceptor).addPathPatterns("/**")
+                .excludePathPatterns("/api/no")
+                .excludePathPatterns("/endpointWisely")
+                .excludePathPatterns("/index");
     }
 
 
