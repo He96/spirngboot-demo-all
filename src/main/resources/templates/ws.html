@@ -37,9 +37,7 @@
                         </div>
                         <div class="col-sm-5 col-xs-12">
                             <button class="btn btn-info" id="connect" onclick="connect();">登录</button>
-                            <button class="btn btn-danger" id="disconnect" disabled="disabled" onclick="disconnect();">
-                                下线
-                            </button>
+                            <button class="btn btn-danger" id="disconnect" disabled="disabled" onclick="disconnect();">下线</button>
                         </div>
                     </div>
                     <div class="form-group" id="conversationDiv">
@@ -50,18 +48,18 @@
                         </div>
                     </div>
                     <div class="form-group" id="sendBtn">
-                        <div class="col-sm-offset-6 col-xs-1">
+                        <div class="col-sm-offset-6 col-sm-1 col-xs-12">
                             <button type="button" class="btn btn-success" style="width:100%" id="sendName"
-                                    onclick="sendName();">发送
+                                    onclick="sendMsg();">发送
                             </button>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-offset-1 col-xs-6">
+                <div class="col-sm-offset-2 col-sm-5 col-xs-12">
                     <div id="msgWindows">
                         <div class="panel panel-info" style="margin-top: 20px">
                             <div class="panel-heading">
-                                <h3 class="panel-title">消息窗</h3>
+                                <h3 class="panel-title">聊天记录</h3>
                             </div>
                             <div class="panel-body">
                                 <p id="response"></p>
@@ -102,9 +100,17 @@
 <script th:src="@{js/plugins/pace/pace.min.js}"></script>
 <!-- jQuery UI -->
 <script th:src="@{js/plugins/jquery-ui/jquery-ui.min.js}"></script>
+<script th:src="@{js/config.js}"></script>
 <script type="text/javascript">
     var stompClient = null;
     var userName = null;
+    $('body').keyup(function (e) {
+        var event = e || window.event;
+        var code = event.keyCode || event.which || event.charCode;
+        if (code == 13) {
+            sendMsg();
+        }
+    });
 
     function setConnected(connected) {
         document.getElementById('connect').disabled = connected;
@@ -118,7 +124,9 @@
 
     function connect() {
         var user = $('#user').val();
-        if (user != "") {
+        if (user == null || user.trim().length==0) {
+            showModel('提示', '请输入姓名!');
+        } else {
             userName = user;
             var socket = new SockJS('/endpointWisely');
             stompClient = Stomp.over(socket);
@@ -129,8 +137,6 @@
                     showResponse(JSON.parse(response.body));
                 });
             });
-        } else {
-            alert("请输入姓名!");
         }
     }
 
@@ -140,9 +146,13 @@
         }
         setConnected(false);
         console.log('连接断开');
+        //菜单跳转
+        $('.nav li').removeClass('active');
+        $('.chart').addClass('active');
     }
 
-    function sendName() {
+    //消息发送
+    function sendMsg() {
         var msg = $('#msg').val();
         if (msg == null || msg == "") {
             showModel('提示', '消息不能为空！')
@@ -155,25 +165,50 @@
         stompClient.send('/welcome', {}, JSON.stringify(data));
     }
 
+    //消息接收
     function showResponse(data) {
         var html = '<div class="msgInfo">';
         if (data.sendUser != userName) {
+            call();//消息提醒
             html += '<span style="color: #3657f9;font-weight: 500;font-family: cursive; font-size: 16px;">'
         } else {
             html += '<span style="color: #478a14;font-weight: 500;font-family: cursive; font-size: 16px;">'
         }
         html += data.sendUser;
-        html+= '&nbsp;'+data.time;
+        html += '&nbsp;' + data.time;
         html += '</span>';
         html += '</br><div style="color: #2b2a2a;font-size: 16px;margin: 5px 0 5px 29px;">' + data.responseMessage + '</div>';
         html += '</div>';
         $('#response').prepend(html);
         //长度限制
         var $index = $('.msgInfo').length;
-        if($index >=15){
+        if ($index >= 15) {
             $('.msgInfo:last').remove();
         }
 
+    }
+
+    //震动
+    function shake() {
+        if (window.top.moveBy) {
+            for (var i = 10; i > 0; i--) {
+                for (var j = 5; j > 0; j--) {
+                    window.top.moveBy(0, i);
+                    window.top.moveBy(i, 0);
+                    window.top.moveBy(0, -i);
+                    window.top.moveBy(-i, 0);
+                }
+            }
+        } else {
+            console.log('暂不支持！');
+        }
+
+    }
+
+    function call() {
+        var audioElementHovertree = document.createElement('audio');
+        audioElementHovertree.setAttribute('src', 'http://w.qq.com/audio/classic.mp3');
+        audioElementHovertree.setAttribute('autoplay', 'autoplay'); //打开自动播放
     }
 
 </script>
