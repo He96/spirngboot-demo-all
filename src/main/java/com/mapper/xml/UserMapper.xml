@@ -75,14 +75,14 @@
 	</sql>
 
 	<!-- 查询（根据主键ID查询） -->
-	<select id="get" resultType="com.entity.User" parameterType="java.lang.Long">
+	<select id="get" resultMap="userResultMap" parameterType="java.lang.Long">
 		SELECT
 		<include refid="columns" />
 		FROM user
 		WHERE id = #{id ,jdbcType = BIGINT}
 	</select>
 
-	<select id="login" resultType="com.entity.User" parameterType="map">
+	<select id="login" resultMap="userResultMap" parameterType="map">
 		SELECT
 		<include refid="columns" />
 		FROM user
@@ -297,10 +297,13 @@
 		<where>
 			delete_flag = 0
 			<if test="mobileNumber != null">
-				mobile_number LIKE '%${mobileNumber}%'
+				AND mobile_number LIKE '%${mobileNumber}%'
 			</if>
 			<if test="fullName != null">
-				full_name LIKE '%${fullName}%'
+				AND full_name LIKE '%${fullName}%'
+			</if>
+			<if test="notId != null">
+				AND id != #{notId ,jdbcType = BIGINT}
 			</if>
 		</where>
 	</sql>

@@ -14,7 +14,6 @@ import java.lang.reflect.Method;
 
 @Component
 public class MvcInterceptor implements HandlerInterceptor {
-
     @Autowired
     LoginContext loginContext;
 
@@ -37,8 +36,9 @@ public class MvcInterceptor implements HandlerInterceptor {
                 return true;
             }else{
                //api调用
-                response.setStatus(401);
+                //response.setStatus(401);
                 //页面调用
+                response.sendRedirect("/login");
                 return false;
             }
         }

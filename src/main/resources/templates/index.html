@@ -38,7 +38,7 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index">
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">何爽</strong>
+                                    <strong class="font-bold" th:text="${userInfo.fullName}"></strong>
                                 </span>
                                 <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span>
                             </span>
@@ -160,11 +160,16 @@
                         <span class="fa arrow"></span>
                     </a>
                 </li>
-                <li class="chart">
-                    <a href="ws">
-                        <i class="fa fa-bullhorn"></i>
+                <li class="chat">
+                    <a href="#">
+                        <i class="fa fa-comments-o"></i>
                         <span class="nav-label">聊天通讯</span>
+                        <span class="fa arrow"></span>
                     </a>
+                    <ul class="nav nav-second-level">
+                        <li class="chatOne"><a href="chatOne">私聊</a></li>
+                        <li class="chatAll"><a href="chatAll">群聊</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#">
@@ -274,7 +279,7 @@
 
 
                     <li>
-                        <a href="login">
+                        <a href="sign/out">
                             <i class="fa fa-sign-out"></i> 退出
                         </a>
                     </li>
@@ -602,11 +607,9 @@
                 color: '#838383'
             }
         };
-
         function gd(year, month, day) {
             return new Date(year, month - 1, day).getTime();
         }
-
         $.plot($("#flot-dashboard-chart"), dataset, options);
 
     });

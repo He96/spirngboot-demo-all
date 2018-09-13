@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>全网聊天</title>
+    <link th:href="@{css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{font-awesome/css/font-awesome.css}" rel="stylesheet">
+    <link th:href="@{css/style.css}" rel="stylesheet">
+</head>
+<body onload="disconnect()">
+<div id="wrapper">
+    <!--菜单栏-->
+    <nav th:replace="index :: navModal"></nav>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <!--顶部栏-->
+        <div th:replace="index :: navBorderTop"></div>
+        <!--内容栏-->
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row" style="margin-top: 30px;">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="user" class="col-sm-2 col-xs-12 control-label">姓名: </label>
+                        <div class="col-sm-4 col-xs-12">
+                            <input type="text" class="form-control" id="user" placeholder="请输入姓名">
+                        </div>
+                        <div class="col-sm-5 col-xs-12">
+                            <button class="btn btn-info" id="connect" onclick="connect();">登录</button>
+                            <button class="btn btn-danger" id="disconnect" disabled="disabled" onclick="disconnect();">下线</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="conversationDiv">
+                        <label for="msg" class="col-sm-2 col-xs-12 control-label">消息: </label>
+                        <div class="col-sm-5 col-xs-12">
+                            <textarea type="text" id="msg" style="width: 100%;height: 113px"
+                                      placeholder="消息内容..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" id="sendBtn">
+                        <div class="col-sm-offset-6 col-sm-1 col-xs-12">
+                            <button type="button" class="btn btn-success" style="width:100%" id="sendName"
+                                    onclick="sendMsg();">发送
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-offset-2 col-sm-5 col-xs-12">
+                    <div id="msgWindows">
+                        <div class="panel panel-info" style="margin-top: 20px">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">聊天记录</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p id="response"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--尾部栏-->
+        <div th:replace="index :: footer"></div>
+    </div>
+</div>
+</body>
+<script th:src="@{js/sockjs.min.js}"></script>
+<script th:src="@{js/stomp.min.js}"></script>
+<script th:src="@{js/moment.js}"></script>
+<script th:src="@{js/jquery3.3.1.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{js/hplus.js?v=2.2.0}"></script>
+<script th:src="@{js/config.js}"></script>
+<script th:src="@{js/chatAll.js}"></script>
+</html>

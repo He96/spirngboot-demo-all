@@ -2,6 +2,7 @@ package com.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.entity.User;
+import com.entity.UsersPrincipal;
 import com.service.UserService;
 import com.util.AllowPass;
 import com.util.ListResult;
@@ -11,6 +12,7 @@ import com.config.LoginInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,7 +42,7 @@ public class LoginController {
     @AllowPass
     @RequestMapping(value = "loginInfo", method = RequestMethod.POST)
     @ResponseBody
-    public Object loginInfo(@RequestBody User data) {
+    public Object loginInfo(@RequestBody User data, HttpSession session) {
         if (data != null && StringUtils.isNotEmpty(data.getAccount()) &&
                 StringUtils.isNotEmpty(data.getPassword())) {
             User user = userService.login(data);
@@ -68,28 +72,4 @@ public class LoginController {
         return "redirect:login";
     }
 
-    @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String indexPage(Model model) {
-        LoginInfo info = loginContext.getInfo();
-        if (info != null && !"".equals(info.getAccount())) {
-            User user = new User();
-            BeanUtils.copyProperties(info, user);
-            model.addAttribute("userInfo", user);
-            return "index";
-        } else {
-            model.addAttribute("info", "登录信息已过期，请重新登录");
-            return "redirect:login";
-        }
-    }
-
-    //获取用户信息
-    @RequestMapping(value = "user", method = RequestMethod.GET)
-    public String userList(User user, Model model) {
-        if (user == null) {
-            user = new User();
-        }
-        List<User> list = userService.getList(user);
-        model.addAttribute("userList", list);
-        return "user";
-    }
 }

@@ -1,8 +1,10 @@
 package com.entity;
 
 import java.io.Serializable;
+import java.security.Principal;
 
 public class User implements Serializable {
+
     /**主键**/
     private Long id;
 
@@ -65,6 +67,20 @@ public class User implements Serializable {
 
     /**备注**/
     private String remark;
+    /**排除的id**/
+    private Long notId;
+
+    public User(){
+
+    }
+
+    public Long getNotId() {
+        return notId;
+    }
+
+    public void setNotId(Long notId) {
+        this.notId = notId;
+    }
 
     public Long getId() {
         return id;

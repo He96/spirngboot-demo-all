@@ -81,7 +81,11 @@
             <artifactId>commons-configuration</artifactId>
             <version>1.10</version>
         </dependency>
-
+        <!--访问权限控制服务-->
+       <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>-->
         <!--mongodb-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
