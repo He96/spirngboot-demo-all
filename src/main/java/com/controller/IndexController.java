@@ -70,4 +70,18 @@ public class IndexController {
         }
         return "redirect:login";
     }
+
+    @RequestMapping(value = "chatAll", method = RequestMethod.GET)
+    public String chartAll(Model model) {
+        LoginInfo info = loginContext.getInfo();
+        if (info != null && info.getId() > 0) {
+            model.addAttribute("userInfo", info);
+            User user = new User();
+            user.setNotId(info.getId());
+            List<User> list = userService.getList(user);
+            model.addAttribute("userList", list);
+            return "chatAll";
+        }
+        return "redirect:login";
+    }
 }

@@ -33,7 +33,6 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("order").setViewName("order");
         registry.addViewController("push").setViewName("news");
         registry.addViewController("login").setViewName("login");
-        registry.addViewController("chatAll").setViewName("chatAll");
     }
 
     //MVC模式

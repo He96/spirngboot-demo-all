@@ -3,7 +3,9 @@ package com;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
@@ -15,15 +17,15 @@ import java.io.IOException;
 @MapperScan(basePackages = {"com.mapper"})
 @EnableConfigurationProperties()
 @ImportResource({"classpath:mybatis.xml"})
-public class Main {
+/*public class Main {
     public static void main(String[] args){
         SpringApplication.run(Main.class,args);
     }
-}
+}*/
 
 
 //发布版
-/*public class Main extends SpringBootServletInitializer {
+public class Main extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
@@ -33,4 +35,4 @@ public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
     }
-}*/
+}
